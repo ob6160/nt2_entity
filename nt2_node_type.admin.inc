@@ -24,7 +24,7 @@ function nt2_node_type_admin_form() {
 }
 
 function nt2_entity_admin_form_reload_tax() {
- // $vocab = CottageVocabManager::vocabTypeExists(variable_get("COTTAGE_VOCAB_MACHINE_NAME"));
+  $vocab = CottageVocabManager::vocabTypeExists(variable_get("COTTAGE_VOCAB_MACHINE_NAME"));
   // if($vocab) {
   //   #Delete each individual term.
   //   foreach (taxonomy_get_tree($vocab->vid) as $term) {
@@ -36,6 +36,7 @@ function nt2_entity_admin_form_reload_tax() {
 
   #Create the cottage tag vocabulary.
   CottageVocabManager::setup_vocabulary_from_api(variable_get("COTTAGE_VOCAB_MACHINE_NAME"), "/");
+
 }
 
 function nt2_node_type_admin_form_submit($form, &$form_state) {

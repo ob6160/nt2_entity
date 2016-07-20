@@ -83,6 +83,29 @@ function nt2_node_type_install() {
 					),
 				),
 			),
+		),
+		'cottage_addressfield' => array(
+			'field_name' => 'cottage_addressfield',
+			'type' => 'addressfield',
+			// 'entity_types' => array('cottage_address_field_type'),
+		)
+	);
+
+	$cottage_fields_custom_instances = array(
+		'cottage_addressfield' => array(
+			'field_name' => 'cottage_addressfield',
+			'entity_type' => 'entity',
+			'bundle' => variable_get("COTTAGE_NODE_TYPE_MACHINE_NAME"),
+			'label' => 'cottage_addressfield',
+			//'required' => TRUE,
+			'widget' => array(
+		      'type' => 'addressfield_standard',
+		      'weight' => -10,
+		      'settings' => array(
+		        'format_handlers' => array('address', 'name-oneline'),
+		      ),
+		    ),
+		    'display' => array(),
 		)
 	);
 
@@ -107,7 +130,7 @@ function nt2_node_type_install() {
 	}
 
 	#Register the requisite fields.
-	$cottage_field_creation_status = CottageNodeManager::registerCottageFieldDefinitionInstances(variable_get("COTTAGE_NODE_TYPE_MACHINE_NAME"), $cottage_fields);
+	$cottage_field_creation_status = CottageNodeManager::registerCottageFieldDefinitionInstances(variable_get("COTTAGE_NODE_TYPE_MACHINE_NAME"), $cottage_fields, $cottage_fields_custom_instances);
 
 	#Create the cottage tag vocabulary.
 	$cottage_vocab_tag_creation_status = CottageVocabManager::createCottageTagVocabulary(variable_get("COTTAGE_VOCAB_MACHINE_NAME"), $vocab_fields);

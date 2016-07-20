@@ -250,7 +250,7 @@ class CottageNodeManager {
 	/*
 	* Register the instances for each of the fields (attach them to the custom cottage node type via the bundle system).
 	*/
-	public static function registerCottageFieldDefinitionInstances($name, $cottage_fields) {
+	public static function registerCottageFieldDefinitionInstances($name, $cottage_fields, $cottage_fields_custom_instances) {
 		foreach ($cottage_fields as $field_key => $field_options) {
 			if(field_info_field($field_key)) {
 				continue;
@@ -266,9 +266,13 @@ class CottageNodeManager {
 				'label' => $field_key,
 				'widget' => array(
 					'type' => 'textfield',
-				) 
+				),
 			);
 
+			if(array_key_exists($field_key, $cottage_fields_custom_instances)) {
+				$instance = $cottage_fields_custom_instances[$field_key];
+			}
+			
 			field_create_instance($instance);
 		}
 	}
